@@ -26,4 +26,4 @@ services:
 
 volumes:
   nest-postgres:
-    name: nest-postgres-db
+    name: process-mapping
