@@ -1,15 +1,25 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateAreaDto } from './dto/create-area.dto';
-import { UpdateAreaDto } from './dto/update-area.dto';
+import { AreasRepository } from './repositories/areas.repository';
 
 @Injectable()
 export class AreasService {
-    create(createAreaDto: CreateAreaDto) {
-        return 'This action adds a new area';
+    constructor(private readonly areasRepository: AreasRepository) {}
+    async create({ name }: CreateAreaDto) {
+        const areaAlreadyExists = await this.areasRepository.findByName(name);
+        if (areaAlreadyExists) {
+            throw new HttpException(
+                'This area already exists',
+                HttpStatus.CONFLICT,
+            );
+        }
+
+        const area = await this.areasRepository.create(name);
+        return { id: area.id, name: area.name };
     }
 
-    findAll() {
-        return `This action returns all areas`;
+    async findAll() {
+        return this.areasRepository.findAll();
     }
 
     findOne(id: number) {
