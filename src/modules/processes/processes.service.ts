@@ -1,26 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { CreateProcessDto } from './dto/create-process.dto';
-import { UpdateProcessDto } from './dto/update-process.dto';
+import { ProcessesRepository } from './repositories/processes.repository';
 
 @Injectable()
 export class ProcessesService {
-  create(createProcessDto: CreateProcessDto) {
-    return 'This action adds a new process';
-  }
+    constructor(private readonly ProcessesRepository: ProcessesRepository) {}
+    async create(createProcessDto: CreateProcessDto) {
+        const process = await this.ProcessesRepository.create(createProcessDto);
+        return process;
+    }
 
-  findAll() {
-    return `This action returns all processes`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} process`;
-  }
-
-  update(id: number, updateProcessDto: UpdateProcessDto) {
-    return `This action updates a #${id} process`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} process`;
-  }
+    findAll() {
+        return `This action returns all processes`;
+    }
 }
