@@ -15,14 +15,4 @@ export class AreasController {
     findAll() {
         return this.areasService.findAll();
     }
-
-    @Get(':id')
-    findOne(@Param('id') id: string) {
-        return this.areasService.findOne(+id);
-    }
-
-    @Delete(':id')
-    remove(@Param('id') id: string) {
-        return this.areasService.remove(+id);
-    }
 }

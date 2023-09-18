@@ -21,12 +21,4 @@ export class AreasService {
     async findAll() {
         return this.areasRepository.findAll();
     }
-
-    findOne(id: number) {
-        return `This action returns a #${id} area`;
-    }
-
-    remove(id: number) {
-        return `This action removes a #${id} area`;
-    }
 }
