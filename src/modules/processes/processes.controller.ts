@@ -12,7 +12,7 @@ export class ProcessesController {
     }
 
     @Get()
-    findAll() {
-        return this.processesService.findAll();
+    findAllWithChildren() {
+        return this.processesService.findAllWithChildren();
     }
 }

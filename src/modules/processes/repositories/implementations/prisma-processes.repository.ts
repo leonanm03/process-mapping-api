@@ -14,4 +14,30 @@ export class PrismaProcessesRepository implements ProcessesRepository {
     async findAll() {
         return this.prisma.process.findMany();
     }
+
+    async getProcessesWithChildren(processId = null) {
+        const processes = await this.prisma.process.findMany({
+            where: {
+                fatherProcessId: processId,
+            },
+            include: {
+                subProcess: {
+                    include: {
+                        subProcess: {},
+                    },
+                },
+            },
+        });
+
+        const result = [];
+        for (const process of processes) {
+            const children = await this.getProcessesWithChildren(process.id);
+            result.push({
+                ...process,
+                subProcess: children,
+            });
+        }
+
+        return result;
+    }
 }

@@ -10,8 +10,9 @@ export class ProcessesService {
         return process;
     }
 
-    findAll() {
-        const processes = this.ProcessesRepository.findAll();
+    async findAllWithChildren () {
+        const processes =
+            await this.ProcessesRepository.getProcessesWithChildren();
         return processes;
     }
 }
