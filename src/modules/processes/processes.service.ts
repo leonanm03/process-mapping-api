@@ -11,6 +11,7 @@ export class ProcessesService {
     }
 
     findAll() {
-        return `This action returns all processes`;
+        const processes = this.ProcessesRepository.findAll();
+        return processes;
     }
 }
