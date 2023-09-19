@@ -19,9 +19,10 @@ export class ProcessesService {
             throw new HttpException('Area not found', HttpStatus.NOT_FOUND);
         }
 
-        if (createProcessDto.fatherProcessId) {
+        const { fatherProcessId } = createProcessDto;
+        if (fatherProcessId) {
             const fatherProcess = await this.processesRepository.findById(
-                createProcessDto.fatherProcessId,
+                fatherProcessId,
             );
             if (!fatherProcess) {
                 throw new HttpException(
