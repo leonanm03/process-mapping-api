@@ -2,37 +2,37 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
 }
 
 model Area {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+    id        Int      @id @default(autoincrement())
+    name      String   @unique
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 
-  processes Process[]
+    processes Process[]
 
-  @@map("areas")
+    @@map("areas")
 }
 
 model Process {
-  id              String   @id @default(uuid())
-  name            String
-  areaId          Int?
-  description     String?
-  fatherProcessId String?
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+    id              String   @id @default(uuid())
+    name            String
+    areaId          Int
+    description     String?
+    fatherProcessId String?
+    createdAt       DateTime @default(now())
+    updatedAt       DateTime @updatedAt
 
-  fatherProcess Process?  @relation("SubProcesses", fields: [fatherProcessId], references: [id])
-  area          Area?     @relation(fields: [areaId], references: [id])
-  subProcess    Process[] @relation("SubProcesses")
+    fatherProcess Process?  @relation("SubProcesses", fields: [fatherProcessId], references: [id], onDelete: Cascade)
+    area          Area?     @relation(fields: [areaId], references: [id])
+    subProcess    Process[] @relation("SubProcesses")
 
-  @@map("processes")
+    @@map("processes")
 }

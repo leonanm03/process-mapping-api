@@ -7,8 +7,7 @@ export class CreateProcessDto {
 
     @IsNumber()
     @IsNotEmpty()
-    @IsOptional()
-    areaId?: number;
+    areaId: number;
 
     @IsString()
     @IsNotEmpty()

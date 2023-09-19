@@ -21,6 +21,7 @@ export class PrismaProcessesRepository implements ProcessesRepository {
                 fatherProcessId: processId,
             },
             include: {
+                area: { select: { name: true } },
                 subProcess: {
                     include: {
                         subProcess: {},
