@@ -15,6 +15,12 @@ export class PrismaProcessesRepository implements ProcessesRepository {
         return this.prisma.process.findMany();
     }
 
+    async findById(id: string) {
+        return this.prisma.process.findUnique({
+            where: { id },
+        });
+    }
+
     async getProcessesWithChildren(processId = null) {
         const processes = await this.prisma.process.findMany({
             where: {
@@ -40,5 +46,9 @@ export class PrismaProcessesRepository implements ProcessesRepository {
         }
 
         return result;
+    }
+
+    async remove(id: string) {
+        return this.prisma.process.delete({ where: { id } });
     }
 }

@@ -1,6 +1,7 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, Param } from '@nestjs/common';
 import { ProcessesService } from './processes.service';
 import { CreateProcessDto } from './dto/create-process.dto';
+import { RemoveProcessDto } from './dto/remove-process.dto';
 
 @Controller('processes')
 export class ProcessesController {
@@ -14,5 +15,10 @@ export class ProcessesController {
     @Get()
     findAllWithChildren() {
         return this.processesService.findAllWithChildren();
+    }
+
+    @Delete(':id')
+    remove(@Param() params: RemoveProcessDto) {
+        return this.processesService.remove(params);
     }
 }
