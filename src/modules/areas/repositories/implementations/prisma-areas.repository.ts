@@ -21,4 +21,10 @@ export class PrismaAreasRepository implements AreasRepository {
     async findAll() {
         return this.prisma.area.findMany();
     }
+
+    async findById(id: number) {
+        return this.prisma.area.findUnique({
+            where: { id },
+        });
+    }
 }
