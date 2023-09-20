@@ -6,4 +6,8 @@ export abstract class ProcessesRepository {
     abstract getProcessesWithChildren(processId?: number): Promise<Process[]>;
     abstract findById(id: string): Promise<Process | null>;
     abstract remove(id: string): Promise<Process>;
+    abstract update(
+        id: string,
+        data: Prisma.ProcessUpdateInput,
+    ): Promise<Process>;
 }

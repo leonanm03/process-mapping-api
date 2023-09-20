@@ -1,7 +1,16 @@
-import { Controller, Get, Post, Body, Delete, Param } from '@nestjs/common';
+import {
+    Controller,
+    Get,
+    Post,
+    Body,
+    Delete,
+    Param,
+    Patch,
+} from '@nestjs/common';
 import { ProcessesService } from './processes.service';
 import { CreateProcessDto } from './dto/create-process.dto';
-import { RemoveProcessDto } from './dto/remove-process.dto';
+import { ProcessIdParamDto } from './dto/process-id-param.dto';
+import { UpdateProcessDto } from './dto/update-process.dto';
 
 @Controller('processes')
 export class ProcessesController {
@@ -18,7 +27,15 @@ export class ProcessesController {
     }
 
     @Delete(':id')
-    remove(@Param() params: RemoveProcessDto) {
+    remove(@Param() params: ProcessIdParamDto) {
         return this.processesService.remove(params);
+    }
+
+    @Patch(':id')
+    update(
+        @Param() params: ProcessIdParamDto,
+        @Body() updateProcessDto: UpdateProcessDto,
+    ) {
+        return this.processesService.update(params, updateProcessDto);
     }
 }

@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsString, IsUUID } from 'class-validator';
 
-export class RemoveProcessDto {
+export class ProcessIdParamDto {
     @IsString()
     @IsNotEmpty()
     @IsUUID()

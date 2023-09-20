@@ -51,4 +51,8 @@ export class PrismaProcessesRepository implements ProcessesRepository {
     async remove(id: string) {
         return this.prisma.process.delete({ where: { id } });
     }
+
+    async update(id: string, data: Prisma.ProcessUpdateInput) {
+        return this.prisma.process.update({ where: { id }, data });
+    }
 }
