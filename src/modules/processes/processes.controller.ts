@@ -26,6 +26,11 @@ export class ProcessesController {
         return this.processesService.findAllWithChildren();
     }
 
+    @Get(':id')
+    findOne(@Param() params: ProcessIdParamDto) {
+        return this.processesService.findOne(params);
+    }
+
     @Delete(':id')
     remove(@Param() params: ProcessIdParamDto) {
         return this.processesService.remove(params);
