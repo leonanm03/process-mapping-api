@@ -86,4 +86,13 @@ export class ProcessesService {
 
         return this.processesRepository.update(id, data);
     }
+
+    async findOne({ id }: ProcessIdParamDto) {
+        const process = await this.processesRepository.findById(id);
+        if (!process) {
+            throw new HttpException('Process not found', HttpStatus.NOT_FOUND);
+        }
+
+        return process;
+    }
 }
